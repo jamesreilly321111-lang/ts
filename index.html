@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Test Site</title>
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:Arial, sans-serif;
+    }
+
+    body{
+      background:#f4f4f4;
+    }
+
+    nav{
+      background:#1f1f1f;
+      padding:15px 30px;
+      position:sticky;
+      top:0;
+      z-index:1000;
+    }
+
+    .nav-container{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      max-width:1200px;
+      margin:auto;
+    }
+
+    .logo a{
+      color:white;
+      font-size:24px;
+      font-weight:bold;
+      text-decoration:none;
+    }
+
+    .nav-links{
+      display:flex;
+      list-style:none;
+      gap:25px;
+    }
+
+    .nav-links li a{
+      color:white;
+      text-decoration:none;
+      font-size:18px;
+      transition:0.3s;
+      cursor:pointer;
+    }
+
+    .nav-links li a:hover{
+      color:#00bfff;
+    }
+
+    .menu-toggle{
+      display:none;
+      flex-direction:column;
+      cursor:pointer;
+      gap:5px;
+    }
+
+    .menu-toggle span{
+      width:28px;
+      height:3px;
+      background:white;
+      border-radius:5px;
+    }
+
+    .content{
+      max-width:1200px;
+      margin:40px auto;
+      padding:20px;
+    }
+
+    .page{
+      display:none;
+      animation:fade 0.3s ease;
+    }
+
+    .page.active{
+      display:block;
+    }
+
+    .hero{
+      background:white;
+      padding:40px;
+      border-radius:16px;
+      box-shadow:0 5px 15px rgba(0,0,0,0.1);
+      margin-bottom:30px;
+      text-align:center;
+    }
+
+    .hero h1{
+      font-size:42px;
+      margin-bottom:10px;
+      color:#222;
+    }
+
+    .hero p{
+      color:#666;
+      font-size:18px;
+    }
+
+    .employee-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));
+      gap:25px;
+    }
+
+    .employee-card{
+      background:white;
+      border-radius:16px;
+      overflow:hidden;
+      box-shadow:0 5px 15px rgba(0,0,0,0.1);
+      transition:0.3s;
+    }
+
+    .employee-card:hover{
+      transform:translateY(-5px);
+    }
+
+    .employee-card img{
+      width:100%;
+      height:250px;
+      object-fit:cover;
+    }
+
+    .employee-info{
+      padding:20px;
+    }
+
+    .employee-info h2{
+      margin-bottom:8px;
+      color:#222;
+    }
+
+    .employee-info p{
+      color:#666;
+      line-height:1.5;
+    }
+
+    .simple-page{
+      background:white;
+      padding:40px;
+      border-radius:16px;
+      box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .simple-page h1{
+      margin-bottom:15px;
+      color:#222;
+    }
+
+    .simple-page p{
+      color:#555;
+      line-height:1.7;
+      margin-bottom:15px;
+    }
+
+    .portfolio-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));
+      gap:20px;
+      margin-top:20px;
+    }
+
+    .portfolio-item{
+      background:#fafafa;
+      padding:20px;
+      border-radius:12px;
+      border:1px solid #ddd;
+    }
+
+    .portfolio-item h3{
+      margin-bottom:10px;
+    }
+
+    .contact-box{
+      margin-top:20px;
+      padding:20px;
+      background:#fafafa;
+      border-radius:12px;
+      border:1px solid #ddd;
+    }
+
+    @keyframes fade{
+      from{
+        opacity:0;
+        transform:translateY(10px);
+      }
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+
+    @media (max-width:768px){
+
+      .menu-toggle{
+        display:flex;
+      }
+
+      .nav-links{
+        position:absolute;
+        top:70px;
+        left:0;
+        width:100%;
+        background:#1f1f1f;
+        flex-direction:column;
+        align-items:center;
+        max-height:0;
+        overflow:hidden;
+        transition:max-height 0.4s ease;
+      }
+
+      .nav-links.active{
+        max-height:300px;
+        padding:20px 0;
+      }
+
+      .nav-links li{
+        margin:15px 0;
+      }
+
+      .hero h1{
+        font-size:32px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-container">
+
+      <!-- CLICKABLE WEBSITE NAME -->
+      <div class="logo">
+        <a href="#home" onclick="showPage('home')">Test Site</a>
+      </div>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home" onclick="showPage('home')">Home</a></li>
+        <li><a href="#about" onclick="showPage('about')">About</a></li>
+        <li><a href="#services" onclick="showPage('services')">Services</a></li>
+        <li><a href="#portfolio" onclick="showPage('portfolio')">Portfolio</a></li>
+        <li><a href="#contact" onclick="showPage('contact')">Contact</a></li>
+      </ul>
+
+      <div class="menu-toggle" id="menuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+    </div>
+  </nav>
+
+  <div class="content">
+
+    <!-- HOME -->
+    <div class="page active" id="home">
+
+      <div class="hero">
+        <h1>Welcome to Test Site</h1>
+        <p>Meet our amazing team members and workers.</p>
+      </div>
+
+      <div class="employee-grid">
+
+        <div class="employee-card">
+          <img src="https://randomuser.me/api/portraits/men/32.jpg">
+          <div class="employee-info">
+            <h2>James Carter</h2>
+            <p>Frontend Developer specializing in modern web interfaces.</p>
+          </div>
+        </div>
+
+        <div class="employee-card">
+          <img src="https://randomuser.me/api/portraits/women/44.jpg">
+          <div class="employee-info">
+            <h2>Sophia Martinez</h2>
+            <p>Project Manager handling organization and team coordination.</p>
+          </div>
+        </div>
+
+        <div class="employee-card">
+          <img src="https://randomuser.me/api/portraits/men/75.jpg">
+          <div class="employee-info">
+            <h2>Daniel Brooks</h2>
+            <p>Backend Engineer focused on databases and APIs.</p>
+          </div>
+        </div>
+
+        <div class="employee-card">
+          <img src="https://randomuser.me/api/portraits/women/68.jpg">
+          <div class="employee-info">
+            <h2>Emily Turner</h2>
+            <p>Graphic Designer creating branding and media visuals.</p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- ABOUT -->
+    <div class="page" id="about">
+      <div class="simple-page">
+        <h1>About Us</h1>
+
+        <p>
+          Test Site is a fictional modern company focused on creating
+          clean websites, creative branding, and reliable online systems.
+        </p>
+
+        <p>
+          Founded in 2026, our mission is to help businesses build
+          professional digital experiences with responsive designs,
+          optimized performance, and creative visuals.
+        </p>
+
+        <p>
+          Our team consists of designers, developers, managers,
+          and engineers working together to produce high-quality projects.
+        </p>
+      </div>
+    </div>
+
+    <!-- SERVICES -->
+    <div class="page" id="services">
+      <div class="simple-page">
+        <h1>Services</h1>
+
+        <p>We provide several digital and creative services including:</p>
+
+        <ul style="margin-left:20px; line-height:2; color:#555;">
+          <li>Responsive Website Development</li>
+          <li>UI/UX Design</li>
+          <li>Backend Systems & APIs</li>
+          <li>Graphic Design & Branding</li>
+          <li>Portfolio & Business Websites</li>
+          <li>Website Optimization</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- PORTFOLIO -->
+    <div class="page" id="portfolio">
+      <div class="simple-page">
+        <h1>Portfolio</h1>
+
+        <p>Some sample projects completed by our team:</p>
+
+        <div class="portfolio-grid">
+
+          <div class="portfolio-item">
+            <h3>Business Website</h3>
+            <p>A clean responsive website for a startup company.</p>
+          </div>
+
+          <div class="portfolio-item">
+            <h3>Online Store</h3>
+            <p>An e-commerce platform with modern UI and checkout system.</p>
+          </div>
+
+          <div class="portfolio-item">
+            <h3>Portfolio Design</h3>
+            <p>Creative portfolio website for a digital artist.</p>
+          </div>
+
+          <div class="portfolio-item">
+            <h3>Dashboard System</h3>
+            <p>Custom admin dashboard with analytics and reports.</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTACT -->
+    <div class="page" id="contact">
+      <div class="simple-page">
+        <h1>Contact Us</h1>
+
+        <p>
+          Want to work with us or ask questions?
+          Reach out through the contact information below.
+        </p>
+
+        <div class="contact-box">
+          <p><strong>Email:</strong> testsite@email.com</p>
+          <p><strong>Phone:</strong> +63 912 345 6789</p>
+          <p><strong>Location:</strong> Quezon City, Philippines</p>
+          <p><strong>Office Hours:</strong> Monday - Friday | 9:00 AM - 6:00 PM</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+
+    menuToggle.addEventListener("click", () => {
+      navLinks.classList.toggle("active");
+    });
+
+    function showPage(pageId){
+
+      const pages = document.querySelectorAll(".page");
+
+      pages.forEach(page => {
+        page.classList.remove("active");
+      });
+
+      document.getElementById(pageId).classList.add("active");
+
+      navLinks.classList.remove("active");
+    }
+  </script>
+
+</body>
+</html>
